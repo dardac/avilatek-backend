@@ -39,10 +39,7 @@ export class AuthService {
     name,
   }: RegisterInput): Promise<RegisterResponse> {
     try {
-      console.log("Iniciando registro:", { email, name, password: "****" });
-
       if (!email || !email.includes("@")) {
-        console.log("Validación fallida: email inválido");
         throw new ApiError(
           400,
           "INVALID_EMAIL",
@@ -50,7 +47,6 @@ export class AuthService {
         );
       }
       if (!password || password.length < 6) {
-        console.log("Validación fallida: contraseña inválida");
         throw new ApiError(
           400,
           "INVALID_PASSWORD",
@@ -59,7 +55,6 @@ export class AuthService {
       }
 
       // Register user on Supabase
-      console.log("Llamando a supabase.auth.signUp");
       const { data, error } = await withRetry(
         () =>
           supabase.auth.signUp({
@@ -70,13 +65,7 @@ export class AuthService {
         "registro en Supabase"
       );
 
-      console.log("Respuesta de Supabase:", {
-        data: data ? "data presente" : "sin data",
-        error,
-      });
-
       if (error) {
-        console.error("Error en Supabase:", error.message, error.code);
         if (
           error.message.includes("User already registered") ||
           error.code === "auth/user-already-exists"
@@ -127,8 +116,6 @@ export class AuthService {
         "crear usuario en Prisma"
       );
 
-      console.log("Usuario creado en Prisma:", user);
-
       return {
         user: {
           id: user.id,
@@ -139,11 +126,6 @@ export class AuthService {
         message: "Usuario registrado exitosamente",
       };
     } catch (error: any) {
-      console.error("Error en registro:", {
-        message: error.message,
-        code: error.code,
-        stack: error.stack,
-      });
       throw error instanceof ApiError
         ? error
         : new ApiError(
@@ -157,10 +139,7 @@ export class AuthService {
 
   static async login({ email, password }: LoginInput): Promise<LoginResponse> {
     try {
-      console.log("Iniciando login:", { email, password: "****" });
-
       if (!email || !email.includes("@")) {
-        console.log("Validación fallida: email inválido");
         throw new ApiError(
           400,
           "INVALID_EMAIL",
@@ -168,7 +147,6 @@ export class AuthService {
         );
       }
       if (!password) {
-        console.log("Validación fallida: contraseña requerida");
         throw new ApiError(
           400,
           "INVALID_PASSWORD",
@@ -176,7 +154,6 @@ export class AuthService {
         );
       }
 
-      console.log("Llamando a supabase.auth.signInWithPassword");
       const { data, error } = await withRetry(
         () =>
           supabase.auth.signInWithPassword({
@@ -186,13 +163,7 @@ export class AuthService {
         "inicio de sesión en Supabase"
       );
 
-      console.log("Respuesta de Supabase:", {
-        data: data ? "data presente" : "sin data",
-        error,
-      });
-
       if (error) {
-        console.error("Error en login:", error.message, error.code);
         throw new ApiError(
           400,
           "LOGIN_FAILED",
@@ -202,7 +173,6 @@ export class AuthService {
       }
 
       if (!data.user) {
-        console.error("No se recibió data.user de Supabase");
         throw new ApiError(
           400,
           "SUPABASE_AUTH_FAILED",

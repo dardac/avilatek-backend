@@ -14,7 +14,6 @@ export async function withRetry<T>(
         `Intento ${attempt} de ${maxAttempts} para: ${operationName}`
       );
       const result = await operation();
-      console.log(`Operación exitosa: ${operationName}`);
       return result;
     } catch (error: any) {
       lastError = error;
