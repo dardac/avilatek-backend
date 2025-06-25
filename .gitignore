@@ -8,6 +8,8 @@
 # Whether you use PnP or not, the node_modules folder is often used to store
 # build artifacts that should be gitignored
 node_modules
+npm-debug.log
+yarn-error.log
 
 # Swap the comments on the following lines if you wish to use zero-installs
 # In that case, don't forget to run `yarn config set enableGlobalCache false`!
@@ -15,3 +17,39 @@ node_modules
 
 #!.yarn/cache
 .pnp.*
+
+/generated/prisma
+
+.env
+
+# Build
+dist/
+build/
+
+# Prisma
+prisma/*.db
+prisma/dev.db
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.temp
+*.bak
+
+*.lock
