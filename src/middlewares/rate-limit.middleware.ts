@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import rateLimit from "express-rate-limit";
 
-import { ApiError } from "../utils/errors";
+import { ApiError } from "../utils";
 
 export const rateLimitMiddleware = rateLimit({
   windowMs: 60 * 1000,

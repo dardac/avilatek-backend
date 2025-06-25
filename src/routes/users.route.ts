@@ -1,8 +1,8 @@
 import { Router, Request, Response, NextFunction } from "express";
 
-import { authMiddleware } from "../middleware/auth.middleware";
+import { authMiddleware } from "../middlewares/auth.middleware";
 import { UserService } from "../services/user.service";
-import { ApiError } from "../utils/errors";
+import { ApiError } from "../utils";
 
 interface UpdateRoleRequestBody {
   role: "user" | "admin";
@@ -120,7 +120,7 @@ router.patch(
         throw new ApiError(
           400,
           "INVALID_INPUT",
-          'El campo "role" es requerido',
+          "El campo \"role\" es requerido",
           "Debe proporcionar un rol válido"
         );
       }

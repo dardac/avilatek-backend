@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-import { ApiError } from "../utils/errors";
-import { withRetry } from "../utils/retry";
+import { ApiError, withRetry } from "../utils";
 
 const prisma = new PrismaClient();
 

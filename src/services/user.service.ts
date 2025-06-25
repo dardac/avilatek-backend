@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-import { ApiError } from "../utils/errors";
+import { ApiError } from "../utils";
 
 const prisma = new PrismaClient();
 
@@ -28,7 +28,7 @@ export class UserService {
         throw new ApiError(
           400,
           "INVALID_ROLE",
-          'Rol inválido. Debe ser "user" o "admin"'
+          "Rol inválido. Debe ser \"user\" o \"admin\""
         );
       }
 

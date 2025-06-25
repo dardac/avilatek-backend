@@ -1,8 +1,8 @@
 import { Request, Response, Router, NextFunction } from "express";
 
-import { authMiddleware } from "../middleware/auth.middleware";
+import { authMiddleware } from "../middlewares/auth.middleware";
 import { ProductService } from "../services/product.service";
-import { ApiError } from "../utils/errors";
+import { ApiError } from "../utils";
 
 interface CreateProductRequestBody {
   name: string;

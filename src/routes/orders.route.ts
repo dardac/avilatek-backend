@@ -1,8 +1,8 @@
 import { Request, Response, Router, NextFunction } from "express";
 
-import { authMiddleware } from "../middleware/auth.middleware";
+import { authMiddleware } from "../middlewares/auth.middleware";
 import { OrderService } from "../services/order.service";
-import { ApiError } from "../utils/errors";
+import { ApiError } from "../utils";
 
 interface CreateOrderRequestBody {
   items: { productId: number; quantity: number }[];

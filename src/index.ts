@@ -2,13 +2,13 @@ import "dotenv/config";
 import express, { Express, Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
 
-import { errorMiddleware } from "./middleware/error.middleware";
-import { rateLimitMiddleware } from "./middleware/rate-limit.middleware";
-import authRoutes from "./routes/auth";
-import orderRoutes from "./routes/orders";
-import productRoutes from "./routes/products";
-import userRoutes from "./routes/users";
-import { setupSwagger } from "./swagger";
+import { errorMiddleware } from "./middlewares/error.middleware";
+import { rateLimitMiddleware } from "./middlewares/rate-limit.middleware";
+import authRoutes from "./routes/auth.route";
+import orderRoutes from "./routes/orders.route";
+import productRoutes from "./routes/products.route";
+import userRoutes from "./routes/users.route";
+import { setupSwagger } from "./utils";
 
 const app: Express = express();
 
