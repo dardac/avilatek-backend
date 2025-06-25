@@ -83,6 +83,49 @@ Backend app construida con TypeScript, Express, Prisma, y Supabase. Proporciona 
 - `yarn format`: Aplica formato con Prettier.
 - `yarn format:check`: Verifica el formato con Prettier.
 
+## Flujo de tests
+
+Después de correr las migraciones de Prisma y haberse conectado a la base de datos (preferiblemente en Supabase), correr la app con:
+
+```bash
+yarn dev
+```
+
+Luego, ir a `http://localhost:3000/api-docs/` si desea ingresar a la documentación en Swagger.
+
+### 1. **Registro y Login**
+
+1. Llamar al endpoint de registro en Swagger (si es el caso) y registrar un usuario, utilizando un correo válido ya que debe verificar el mismo.
+
+2. Al verificar el correo, debe inciar sesión a través del endpoint de login. Luego, debe copiar el token para pegarlo en "Authorize".
+
+**Nota:** Los usuarios se crean automáticamente con el rol de administrador, esto es SOLO para propósitos de pruebas. De igual manera, se agregó un endpoint para la actualización de un rol.
+
+### 2. **Productos**
+
+1. Crear un producto con el endpoint `POST` de productos.
+
+2. Obtener todos los productos con el endpoint `GET`.
+
+3. Obtener el producto creado con `GET` en products/{id}.
+
+4. Actualizar el producto con el endpoint `PUT`.
+
+5. Verificar los cambios en el producto con `GET` en products/{id}.
+
+6. Borrar el producto con `DELETE`.
+
+### 3. **Pedidos**
+
+1. Crear un pedido con el endpoint `POST` de orders.
+
+2. Obtener todos los pedidos con el endpoint `GET`.
+
+3. Obtener el pedido creado con `GET` en orders/{id}.
+
+4. Verificar los cambios en el producto con `GET` en products/{id}, para comprobar que el stock haya bajado.
+
+
 ## Decisiones de diseño
 
 ### 1. **Base de datos PostgreSQL**
@@ -124,7 +167,7 @@ Backend app construida con TypeScript, Express, Prisma, y Supabase. Proporciona 
 
 - **Pruebas unitarias**: Implementar Jest para pruebas automatizadas.
 - **Husky**: Configurar pre-commit hooks para linting y formato.
-- **Redis**: Usar Redis para rate limiting distribuido.
-- **Módulos ES**: Migrar de CommonJS a ESM para mejor compatibilidad.
+- **Redis**: Para almacenamiento en cache.
+- **BullMQ**: Para procesar pedidos en segundo plano.
 - **Despliegue**: Documentar despliegue en Supabase/Vercel.
 - **Docker**: Dockerizar la aplicación para más facilidad al momento de correr y desplegar la app.

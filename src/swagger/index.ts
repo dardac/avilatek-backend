@@ -1,26 +1,20 @@
 import swaggerJsdoc from "swagger-jsdoc";
 
-const options = {
-  definition: {
+const swaggerOptions = {
+  swaggerDefinition: {
     openapi: "3.0.0",
     info: {
-      title: "Avilatek Backend API",
+      title: "AvilaTek Backend API",
       version: "1.0.0",
-      description: "API REST para una plataforma de comercio electrónico",
+      description: "API para el backend de AvilaTek",
     },
     servers: [
       {
-        url: "http://localhost:3000",
+        url: "/api",
+        description: "API Server",
       },
     ],
     components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: "http",
-          scheme: "bearer",
-          bearerFormat: "JWT",
-        },
-      },
       schemas: {
         Error: {
           type: "object",
@@ -28,22 +22,19 @@ const options = {
             error: {
               type: "object",
               properties: {
-                code: {
-                  type: "string",
-                  example: "INVALID_INPUT",
-                },
-                message: {
-                  type: "string",
-                  example: 'El campo "role" es requerido',
-                },
-                details: {
-                  type: "string",
-                  example: "Debe proporcionar un rol válido",
-                },
+                code: { type: "string" },
+                message: { type: "string" },
+                details: { type: ["string", "null"] },
               },
-              required: ["code", "message"],
             },
           },
+        },
+      },
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
         },
       },
     },
@@ -51,4 +42,4 @@ const options = {
   apis: ["./src/routes/*.ts"],
 };
 
-export const setupSwagger = () => swaggerJsdoc(options);
+export const setupSwagger = () => swaggerJsdoc(swaggerOptions);
